@@ -12,8 +12,10 @@ namespace UltimateTicTacToeBot
     {
         public const String EmptyField = ".";
         public const String AvailableField = "-1";
-        public const int COLS = 9;
-        public const int ROWS = 9;
+
+        // Size of macroboard
+        public const int Cols = 9;
+        public const int Rows = 9;
 
         public int MyId { get; set; }
         public int OpponentId { get; set; }      
@@ -23,8 +25,8 @@ namespace UltimateTicTacToeBot
 
         public Field()
         {
-            board = new String[COLS, ROWS];
-            macroboard = new String[COLS / 3, ROWS / 3];
+            board = new String[Cols, Rows];
+            macroboard = new String[Cols / 3, Rows / 3];
             ClearBoard();
         }
 
@@ -37,9 +39,9 @@ namespace UltimateTicTacToeBot
             s = s.Replace(";", ",");
             String[] r = s.Split(',');
             int counter = 0;
-            for (int y = 0; y < ROWS; y++)
+            for (int y = 0; y < Rows; y++)
             {
-                for (int x = 0; x < COLS; x++)
+                for (int x = 0; x < Cols; x++)
                 {
                     board[x, y] = r[counter];
                     counter++;
@@ -67,9 +69,9 @@ namespace UltimateTicTacToeBot
 
         public void ClearBoard()
         {
-            for (int x = 0; x < COLS; x++)
+            for (int x = 0; x < Cols; x++)
             {
-                for (int y = 0; y < ROWS; y++)
+                for (int y = 0; y < Rows; y++)
                 {
                     board[x, y] = EmptyField;
                 }
@@ -80,9 +82,9 @@ namespace UltimateTicTacToeBot
         {
             var moves = new List<Move>();
 
-            for (int y = 0; y < ROWS; y++)
+            for (int y = 0; y < Rows; y++)
             {
-                for (int x = 0; x < COLS; x++)
+                for (int x = 0; x < Cols; x++)
                 {
                     if (IsInActiveMicroboard(x, y) && board[x, y] == EmptyField)
                     {
@@ -108,9 +110,9 @@ namespace UltimateTicTacToeBot
         {
             var r = new StringBuilder("");
             int counter = 0;
-            for (int y = 0; y < ROWS; y++)
+            for (int y = 0; y < Rows; y++)
             {
-                for (int x = 0; x < COLS; x++)
+                for (int x = 0; x < Cols; x++)
                 {
                     if (counter > 0)
                     {
@@ -130,8 +132,8 @@ namespace UltimateTicTacToeBot
         /// <returns>Returns true when field is full, otherwise returns false</returns>
         public bool IsFull()
         {
-            for (int x = 0; x < COLS; x++)
-                for (int y = 0; y < ROWS; y++)
+            for (int x = 0; x < Cols; x++)
+                for (int y = 0; y < Rows; y++)
                     if (board[x, y] == EmptyField)
                         return false; // At least one cell is not filled
 
@@ -141,9 +143,9 @@ namespace UltimateTicTacToeBot
         
         public bool IsEmpty()
         {
-            for (int x = 0; x < COLS; x++)
+            for (int x = 0; x < Cols; x++)
             {
-                for (int y = 0; y < ROWS; y++)
+                for (int y = 0; y < Rows; y++)
                 {
                     if (board[x, y] != EmptyField)
                     {
