@@ -13,20 +13,20 @@ namespace UltimateTicTacToeBot
         public const String EmptyField = ".";
         public const String AvailableField = "-1";
 
-        // Size of macroboard
+        // Size of board
         public const int Cols = 9;
         public const int Rows = 9;
 
         public int MyId { get; set; }
         public int OpponentId { get; set; }      
         
-        private String[,] board;
-        private String[,] macroboard;
+        private string[,] board;
+        private string[,] macroboard;
 
         public Field()
         {
-            board = new String[Cols, Rows];
-            macroboard = new String[Cols / 3, Rows / 3];
+            board = new string[Cols, Rows];
+            macroboard = new string[Cols / 3, Rows / 3];
             ClearBoard();
         }
 
@@ -37,7 +37,7 @@ namespace UltimateTicTacToeBot
         public void ParseFromString(String s)
         {
             s = s.Replace(";", ",");
-            String[] r = s.Split(',');
+            string[] r = s.Split(',');
             int counter = 0;
             for (int y = 0; y < Rows; y++)
             {
@@ -96,7 +96,7 @@ namespace UltimateTicTacToeBot
             return moves;
         }
 
-        public Boolean IsInActiveMicroboard(int x, int y)
+        public bool IsInActiveMicroboard(int x, int y)
         {
             return macroboard[x / 3, y / 3] == AvailableField;
         }
@@ -106,7 +106,7 @@ namespace UltimateTicTacToeBot
         /// Creates comma separated String with player ids for the microboards.
         /// </summary>
         /// <returns>String with player names for every cell, or 'empty' when cell is empty.</returns>
-        override public String ToString()
+        override public string ToString()
         {
             var r = new StringBuilder("");
             int counter = 0;
@@ -133,10 +133,16 @@ namespace UltimateTicTacToeBot
         public bool IsFull()
         {
             for (int x = 0; x < Cols; x++)
+            {
                 for (int y = 0; y < Rows; y++)
+                {
                     if (board[x, y] == EmptyField)
-                        return false; // At least one cell is not filled
-
+                    {
+                        // At least one cell is not filled
+                        return false; 
+                    }
+                }
+            }
             // All cells are filled
             return true;
         }
@@ -162,7 +168,7 @@ namespace UltimateTicTacToeBot
         /// <param name="column"></param>
         /// <param name="row"></param>
         /// <returns></returns>
-        public String GetPlayerId(int column, int row)
+        public string GetPlayerId(int column, int row)
         {
             return board[column, row];
         }
